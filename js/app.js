@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DayPicker from "react-day-picker";
 import TimePicker from "rc-time-picker";
-import CsvDownloader from "react-csv-downloader";
+import Downloader from "./components/Downloader";
 import moment from "moment";
 
 import styled from "styled-components";
@@ -35,109 +35,26 @@ const Input = styled.div`
     margin: 0;
   }
 `;
-
-
-
-function Downloader({startTime}) {
-
-  let newTime = startTime.add(1, 'hours').format('hh:mm')
-  return(
-      <div>{newTime}</div>
-  )
-}
+ 
 export default function App(props) {
   let initialState = {
     title: "",
-    date: new Date(),
+    date: new Date() ,
     startTime: moment(moment(), "HH:mm"),
+    endTime: moment(moment().add(1, 'hours'), "HH:mm"),
     desc: "",
     sessions: 10 
   };
   let [state, setState] = useState(initialState);
-  let [schedule, setSchedule] = useState([]);
-
-  const columns = [
-    {
-      id: "subject",
-      displayName: "Subject",
-    },
-    {
-      id: "start_date",
-      displayName: "Start Date",
-    },
-    {
-      id: "all_day_event",
-      displayName: "All Day Event",
-    },
-    {
-      id: "start_time",
-      displayName: "Start Time",
-    },
-    {
-      id: "end_time",
-      displayName: "End Time",
-    },
-    {
-      id: "location",
-      displayName: "Location",
-    },
-    {
-      id: "desc",
-      displayName: "Description",
-    },
-  ];
-
-  useEffect(() => {
-    ///setSchedule(buildSchedule(state));
-  },[state]);
-  function intervalEvent({ subject, start_date, start_time,end_time, desc  }) {
-    this.subject = subject;
-    this.start_date = start_date;
-    this.all_day_event = false;
-    this.start_time = start_time;
-    this.end_time = end_time;
-    this.location = false;
-    this.desc = desc;
-  }
-  function buildInterval(n) {
-    let arr = [0, 1];
-    for (let i = 2; i < n + 1; i++) {
-      arr.push(arr[i - 2] + arr[i - 1]);
-    }
-    return arr;
-  }
-  function addDays(days,date) {
-    let newDate = new Date();
-    newDate.setDate(date.getDate() + parseInt(days));
-    return newDate;
-  }
-  function buildSchedule(state) {
-    let intervals = buildInterval(10);
-    let schduleArr = [];
-    const localState = {...state,test:"hello world"};
-    let startTimeFormated = (localState.startTime).format('hh:mm');
-    let endTimeFormatted = (localState.startTime).add(1, 'hours').format('hh:mm')
-    intervals.forEach((i) => {
-      let eventData = {
-        subject: localState.title,
-        start_date: addDays(i,localState.date),
-        start_time: startTimeFormated,
-        end_time:  endTimeFormatted,
-        desc: localState.desc,
-      };
-      var newEvent = new intervalEvent(eventData);
-      schduleArr.push(newEvent);
-    });
    
-    return schduleArr;
-  }
-
   function handleDayClick(day, { selected }) {
     console.log(day);
     setState({ ...state, date: day });
   }
   function updateTime(time) {
-    setState({ ...state, startTime: time });
+
+    let newEnd = moment(time.add(1, 'hours'), "HH:mm")
+    setState({ ...state, startTime: time, endTime:newEnd  });
   }
   let ActiveCard = Card;
   return (
@@ -145,7 +62,6 @@ export default function App(props) {
       <article>
         <h1>FIBO</h1>
         <p>A spaced repetition planner based on the fibonacci sequence</p>
-        <Downloader startTime={state.startTime}/>
         <Card>
           <h2>What do you want to learn?</h2>
           <Input>
@@ -185,6 +101,8 @@ export default function App(props) {
         </Card> */}
         <Card>
           <h2>Download your schedule</h2>
+          <Downloader  data={state}/>
+
         </Card>
       </article>
     </div>

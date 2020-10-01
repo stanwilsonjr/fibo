@@ -46317,7 +46317,89 @@ var CsvDownload = /** @class */ (function (_super) {
 }(React.Component));
 exports.default = CsvDownload;
 
-},{"file-saver":"node_modules/file-saver/dist/FileSaver.min.js","react":"node_modules/react/index.js","./lib/csv":"node_modules/react-csv-downloader/dist/lib/csv.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
+},{"file-saver":"node_modules/file-saver/dist/FileSaver.min.js","react":"node_modules/react/index.js","./lib/csv":"node_modules/react-csv-downloader/dist/lib/csv.js"}],"js/components/Downloader.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Downloader;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _moment = _interopRequireDefault(require("moment"));
+
+var _reactCsvDownloader = _interopRequireDefault(require("react-csv-downloader"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var columns = [{
+  id: "subject",
+  displayName: "Subject"
+}, {
+  id: "start_date",
+  displayName: "Start Date"
+}, {
+  id: "all_day_event",
+  displayName: "All Day Event"
+}, {
+  id: "start_time",
+  displayName: "Start Time"
+}, {
+  id: "end_time",
+  displayName: "End Time"
+}, {
+  id: "location",
+  displayName: "Location"
+}, {
+  id: "desc",
+  displayName: "Description"
+}];
+
+function Downloader(props) {
+  var data = props.data;
+
+  function buildInterval(n) {
+    var arr = [0, 1];
+
+    for (var i = 2; i < n + 1; i++) {
+      arr.push(arr[i - 2] + arr[i - 1]);
+    }
+
+    return arr;
+  }
+
+  function addDays(days, date) {
+    var newDate = new Date();
+    newDate.setDate(date.getDate() + parseInt(days));
+    return (0, _moment.default)(newDate).format('MM/DD/YYYY');
+  }
+
+  var intervals = buildInterval(10);
+  var schduleArr = [];
+  intervals.forEach(function (i) {
+    var eventData = {
+      subject: data.title,
+      start_date: addDays(i, data.date),
+      start_time: data.startTime,
+      end_time: data.endTime,
+      desc: data.desc,
+      all_day_event: false,
+      location: false
+    };
+    schduleArr.push(eventData);
+  });
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, JSON.stringify(schduleArr), /*#__PURE__*/_react.default.createElement(_reactCsvDownloader.default, {
+    columns: columns,
+    filename: "myfile",
+    datas: schduleArr
+  }, /*#__PURE__*/_react.default.createElement("button", null, "Download")));
+}
+},{"react":"node_modules/react/index.js","moment":"node_modules/moment/moment.js","react-csv-downloader":"node_modules/react-csv-downloader/dist/index.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
 //
 
 module.exports = function shallowEqual(objA, objB, compare, compareContext) {
@@ -48274,7 +48356,7 @@ var _reactDayPicker = _interopRequireDefault(require("react-day-picker"));
 
 var _rcTimePicker = _interopRequireDefault(require("rc-time-picker"));
 
-var _reactCsvDownloader = _interopRequireDefault(require("react-csv-downloader"));
+var _Downloader = _interopRequireDefault(require("./components/Downloader"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
@@ -48334,17 +48416,12 @@ var Card = _styledComponents.default.section(_templateObject());
 
 var Input = _styledComponents.default.div(_templateObject2());
 
-function Downloader(_ref) {
-  var startTime = _ref.startTime;
-  var newTime = startTime.add(1, 'hours').format('hh:mm');
-  return /*#__PURE__*/_react.default.createElement("div", null, newTime);
-}
-
 function App(props) {
   var initialState = {
     title: "",
     date: new Date(),
     startTime: (0, _moment.default)((0, _moment.default)(), "HH:mm"),
+    endTime: (0, _moment.default)((0, _moment.default)().add(1, 'hours'), "HH:mm"),
     desc: "",
     sessions: 10
   };
@@ -48354,93 +48431,8 @@ function App(props) {
       state = _useState2[0],
       setState = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      schedule = _useState4[0],
-      setSchedule = _useState4[1];
-
-  var columns = [{
-    id: "subject",
-    displayName: "Subject"
-  }, {
-    id: "start_date",
-    displayName: "Start Date"
-  }, {
-    id: "all_day_event",
-    displayName: "All Day Event"
-  }, {
-    id: "start_time",
-    displayName: "Start Time"
-  }, {
-    id: "end_time",
-    displayName: "End Time"
-  }, {
-    id: "location",
-    displayName: "Location"
-  }, {
-    id: "desc",
-    displayName: "Description"
-  }];
-  (0, _react.useEffect)(function () {///setSchedule(buildSchedule(state));
-  }, [state]);
-
-  function intervalEvent(_ref2) {
-    var subject = _ref2.subject,
-        start_date = _ref2.start_date,
-        start_time = _ref2.start_time,
-        end_time = _ref2.end_time,
-        desc = _ref2.desc;
-    this.subject = subject;
-    this.start_date = start_date;
-    this.all_day_event = false;
-    this.start_time = start_time;
-    this.end_time = end_time;
-    this.location = false;
-    this.desc = desc;
-  }
-
-  function buildInterval(n) {
-    var arr = [0, 1];
-
-    for (var i = 2; i < n + 1; i++) {
-      arr.push(arr[i - 2] + arr[i - 1]);
-    }
-
-    return arr;
-  }
-
-  function addDays(days, date) {
-    var newDate = new Date();
-    newDate.setDate(date.getDate() + parseInt(days));
-    return newDate;
-  }
-
-  function buildSchedule(state) {
-    var intervals = buildInterval(10);
-    var schduleArr = [];
-
-    var localState = _objectSpread(_objectSpread({}, state), {}, {
-      test: "hello world"
-    });
-
-    var startTimeFormated = localState.startTime.format('hh:mm');
-    var endTimeFormatted = localState.startTime.add(1, 'hours').format('hh:mm');
-    intervals.forEach(function (i) {
-      var eventData = {
-        subject: localState.title,
-        start_date: addDays(i, localState.date),
-        start_time: startTimeFormated,
-        end_time: endTimeFormatted,
-        desc: localState.desc
-      };
-      var newEvent = new intervalEvent(eventData);
-      schduleArr.push(newEvent);
-    });
-    return schduleArr;
-  }
-
-  function handleDayClick(day, _ref3) {
-    var selected = _ref3.selected;
+  function handleDayClick(day, _ref) {
+    var selected = _ref.selected;
     console.log(day);
     setState(_objectSpread(_objectSpread({}, state), {}, {
       date: day
@@ -48448,15 +48440,15 @@ function App(props) {
   }
 
   function updateTime(time) {
+    var newEnd = (0, _moment.default)(time.add(1, 'hours'), "HH:mm");
     setState(_objectSpread(_objectSpread({}, state), {}, {
-      startTime: time
+      startTime: time,
+      endTime: newEnd
     }));
   }
 
   var ActiveCard = Card;
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("h1", null, "FIBO"), /*#__PURE__*/_react.default.createElement("p", null, "A spaced repetition planner based on the fibonacci sequence"), /*#__PURE__*/_react.default.createElement(Downloader, {
-    startTime: state.startTime
-  }), /*#__PURE__*/_react.default.createElement(Card, null, /*#__PURE__*/_react.default.createElement("h2", null, "What do you want to learn?"), /*#__PURE__*/_react.default.createElement(Input, null, /*#__PURE__*/_react.default.createElement("input", {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("article", null, /*#__PURE__*/_react.default.createElement("h1", null, "FIBO"), /*#__PURE__*/_react.default.createElement("p", null, "A spaced repetition planner based on the fibonacci sequence"), /*#__PURE__*/_react.default.createElement(Card, null, /*#__PURE__*/_react.default.createElement("h2", null, "What do you want to learn?"), /*#__PURE__*/_react.default.createElement(Input, null, /*#__PURE__*/_react.default.createElement("input", {
     placeholder: "Add title",
     type: "text",
     value: state.title,
@@ -48482,7 +48474,9 @@ function App(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactDayPicker.default, {
     onDayClick: handleDayClick,
     className: "inputcontainer"
-  })), /*#__PURE__*/_react.default.createElement(Card, null, /*#__PURE__*/_react.default.createElement("h2", null, "Download your schedule"))));
+  })), /*#__PURE__*/_react.default.createElement(Card, null, /*#__PURE__*/_react.default.createElement("h2", null, "Download your schedule"), /*#__PURE__*/_react.default.createElement(_Downloader.default, {
+    data: state
+  }))));
 } //https://github.com/gpbl/react-day-picker
 // function fib(n){
 //     let arr = [0, 1];
@@ -48495,7 +48489,7 @@ function App(props) {
 //   console.log(testArr)
 ///https://stackoverflow.com/questions/3818193/how-to-add-number-of-days-to-todays-date
 // https://www.google.com/search?q=react+generate+csv&rlz=1C5CHFA_enUS565US565&oq=react+generate+csv&aqs=chrome..69i57.10713j0j7&{google:bookmarkBarPinned}sourceid=chrome&{google:instantExtendedEnabledParameter}{google:omniboxStartMarginParameter}ie=UTF-8
-},{"react":"node_modules/react/index.js","react-day-picker":"node_modules/react-day-picker/build/index.js","rc-time-picker":"node_modules/rc-time-picker/es/index.js","react-csv-downloader":"node_modules/react-csv-downloader/dist/index.js","moment":"node_modules/moment/moment.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","react-day-picker/lib/style.css":"node_modules/react-day-picker/lib/style.css","rc-time-picker/assets/index.css":"node_modules/rc-time-picker/assets/index.css"}],"js/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-day-picker":"node_modules/react-day-picker/build/index.js","rc-time-picker":"node_modules/rc-time-picker/es/index.js","./components/Downloader":"js/components/Downloader.js","moment":"node_modules/moment/moment.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","react-day-picker/lib/style.css":"node_modules/react-day-picker/lib/style.css","rc-time-picker/assets/index.css":"node_modules/rc-time-picker/assets/index.css"}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -48535,7 +48529,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52235" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65462" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
