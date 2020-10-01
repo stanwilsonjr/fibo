@@ -37,6 +37,8 @@ export default function Downloader(props) {
   let { data } = props;
 
   function buildInterval(n) {
+    // n += 0;
+
     let arr = [0, 1];
     for (let i = 2; i < n + 1; i++) {
       arr.push(arr[i - 2] + arr[i - 1]);
@@ -44,8 +46,8 @@ export default function Downloader(props) {
     return arr;
   }
   function addDays(days, date) {
-    let newDate = new Date();
-    newDate.setDate(date.getDate() + parseInt(days));
+    let newDate = new Date( date  );
+    newDate.setDate(newDate.getDate() + parseInt(days));
     return  moment(newDate).format('MM/DD/YYYY');
   }
 
@@ -64,6 +66,8 @@ export default function Downloader(props) {
     };
     schduleArr.push(eventData);
   });
+
+  console.log(schduleArr.length)
 
   return (
     <>

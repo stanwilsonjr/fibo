@@ -52,8 +52,8 @@ export default function App(props) {
     setState({ ...state, date: day });
   }
   function updateTime(time) {
-
-    let newEnd = moment(time.add(1, 'hours'), "HH:mm")
+    let endTime = moment(time);
+    let newEnd = moment(endTime.add(1, 'hours'), "HH:mm")
     setState({ ...state, startTime: time, endTime:newEnd  });
   }
   let ActiveCard = Card;
