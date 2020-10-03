@@ -1,0 +1,61 @@
+Arguments: 
+  /usr/local/Cellar/node/14.11.0/bin/node /usr/local/bin/yarn add SharedElements
+
+PATH: 
+  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/stanwilsonjr/Development/fibo-cal/node_modules/.bin:/usr/local/opt/ruby/bin:/Users/stanwilsonjr/google-cloud-sdk/bin:/Users/stanwilsonjr/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/mysql/bin:/usr/local/go/bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  14.11.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.npmjs.org/SharedElements: Not found
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
+      at Request.emit (events.js:314:20)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141634:10)
+      at Request.emit (events.js:314:20)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141556:12)
+      at Object.onceWrapper (events.js:420:28)
+      at IncomingMessage.emit (events.js:326:22)
+      at endReadableNT (_stream_readable.js:1252:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+
+npm manifest: 
+  {
+    "name": "fibo-cal",
+    "version": "0.0.1",
+    "description": "Calendar events planned based on Fibonacci series",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "dev": "parcel index.html"
+    },
+    "author": "Stan Wilson Jr",
+    "license": "ISC",
+    "devDependencies": {
+      "parcel-bundler": "^1.12.4"
+    },
+    "dependencies": {
+      "@babel/core": "^7.11.6",
+      "@babel/plugin-transform-destructuring": "^7.10.4",
+      "moment": "^2.28.0",
+      "rc-time-picker": "^3.7.3",
+      "react": "^16.13.1",
+      "react-csv-downloader": "^2.1.0",
+      "react-day-picker": "^7.4.8",
+      "react-dom": "^16.13.1",
+      "styled-components": "^5.2.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

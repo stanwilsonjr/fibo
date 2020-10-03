@@ -1,111 +1,61 @@
-import React, { useState, useEffect } from "react";
-import DayPicker from "react-day-picker";
-import TimePicker from "rc-time-picker";
+import React, { useState } from "react";
+
 import Downloader from "./components/Downloader";
+import Inputcard from "./components/InputCard";
+import Datecard from "./components/DateCard";
+
+import { Card } from "./components/SharedElements";
+
+import { AppContext } from "./components/AppContext";
+
 import moment from "moment";
 
 import styled from "styled-components";
-import "react-day-picker/lib/style.css";
-import "rc-time-picker/assets/index.css";
 
-const Card = styled.section`
-  border: 1px solid #333;
-  margin: 20px 0;
-  padding: 15px 25px;
-  border-radius: 10px;
-  font-family: Inter, sans-serif;
-  display: flex;
-  flex-direction: column;
-  & .inputcontainer {
-    max-width: 300px;
-  }
-`;
-const Input = styled.div`
-  width: 300px;
-  & input {
-    width: 100%;
-    min-height: 30px;
-    margin: 0 0 5px 0;
-    padding: 0;
-  }
 
-  & textarea {
-    width: 100%;
-    min-height: 200px;
-    margin: 0;
-  }
-`;
- 
 export default function App(props) {
   let initialState = {
     title: "",
-    date: new Date() ,
+    date: new Date(),
     startTime: moment(moment(), "HH:mm"),
-    endTime: moment(moment().add(1, 'hours'), "HH:mm"),
+    endTime: moment(moment().add(1, "hours"), "HH:mm"),
     desc: "",
-    sessions: 10 
+    sessions: 10,
   };
+  let Plansections = [ Inputcard,Datecard,Downloader  ];
+
   let [state, setState] = useState(initialState);
-   
-  function handleDayClick(day, { selected }) {
-    console.log(day);
-    setState({ ...state, date: day });
+  let [step,updateSteps] = useState(0);
+
+
+  let ActiveCard = Plansections[step];
+
+
+  function progress(direction){
+    if( direction === "next" && step < (Plansections.length - 1) ) {
+      updateSteps(step + 1)
+    }
+    if( direction === "prev" && step > 0 ) {
+      updateSteps(step - 1)
+    }
+    
   }
-  function updateTime(time) {
-    let endTime = moment(time);
-    let newEnd = moment(endTime.add(1, 'hours'), "HH:mm")
-    setState({ ...state, startTime: time, endTime:newEnd  });
-  }
-  let ActiveCard = Card;
   return (
-    <div>
-      <article>
-        <h1>FIBO</h1>
-        <p>A spaced repetition planner based on the fibonacci sequence</p>
-        <Card>
-          <h2>What do you want to learn?</h2>
-          <Input>
-            <input
-              placeholder="Add title"
-              type="text"
-              value={state.title}
-              onChange={(e) => {
-                setState({ ...state, title: e.currentTarget.value });
-              }}
-            />
-            <textarea
-              value={state.desc}
-              placeholder="Add Description"
-              onChange={(e) => {
-                setState({ ...state, desc: e.currentTarget.value });
-              }}
-            />
-          </Input>
-        </Card>
+    <AppContext.Provider value={{ state, setState }}>
+      <div>
+        <article>
+          <h1>FIBO</h1>
+          <button  onClick={(e) => progress('next')  }>Next</button>
+          <button  onClick={(e) => progress('prev')  }>Previous</button>
 
-        <Card>
-          <h2>When do you want to start?</h2>
-
-          <TimePicker
-            showSecond={false}
-            onChange={updateTime}
-            use12Hours
-            className="inputcontainer"
-            defaultValue={state.startTime}
-          />
-          <DayPicker onDayClick={handleDayClick} className="inputcontainer" />
-        </Card>
-        {/* <Card>
-          <h2>How many sessions?</h2>
-          
-        </Card> */}
-        <Card>
-          <h2>Download your schedule</h2>
-          <Downloader  data={state}/>
-
-        </Card>
-      </article>
-    </div>
+          <p>A spaced repetition planner based on the fibonacci sequence</p>
+          <ActiveCard/>
+          {/* <Inputcard />
+          <Datecard/>
+          <Downloader  /> */}
+        </article>
+      </div>
+    </AppContext.Provider>
   );
 }
 //https://github.com/gpbl/react-day-picker

@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import { Card } from "./SharedElements";
+
+import { AppContext } from "./AppContext";
+
 import moment from "moment";
+
 import CsvDownloader from "react-csv-downloader";
 
 const columns = [
@@ -33,11 +38,10 @@ const columns = [
   },
 ];
 
-export default function Downloader(props) {
-  let { data } = props;
-
+export default function Downloader() {
+  const context = useContext(AppContext);
+  const { state  } = context;
   function buildInterval(n) {
-    // n += 0;
 
     let arr = [0, 1];
     for (let i = 2; i < n + 1; i++) {
@@ -46,9 +50,9 @@ export default function Downloader(props) {
     return arr;
   }
   function addDays(days, date) {
-    let newDate = new Date( date  );
+    let newDate = new Date(date);
     newDate.setDate(newDate.getDate() + parseInt(days));
-    return  moment(newDate).format('MM/DD/YYYY');
+    return moment(newDate).format("MM/DD/YYYY");
   }
 
   let intervals = buildInterval(10);
@@ -56,25 +60,27 @@ export default function Downloader(props) {
 
   intervals.forEach((i) => {
     let eventData = {
-      subject: data.title,
-      start_date: addDays(i, data.date),
-      start_time: data.startTime,
-      end_time: data.endTime,
-      desc: data.desc,
+      subject: state.title,
+      start_date: addDays(i, state.date),
+      start_time: state.startTime,
+      end_time: state.endTime,
+      desc: state.desc,
       all_day_event: false,
-      location: false
+      location: false,
     };
     schduleArr.push(eventData);
   });
 
-  console.log(schduleArr.length)
+  console.log(schduleArr.length);
 
   return (
-    <>
-      {JSON.stringify(schduleArr)}
+    <Card>
+      {/* {JSON.stringify(schduleArr)} */}
+
+      <h2>Download your schedule</h2>
       <CsvDownloader columns={columns} filename="myfile" datas={schduleArr}>
         <button>Download</button>
       </CsvDownloader>
-    </>
+    </Card>
   );
 }
