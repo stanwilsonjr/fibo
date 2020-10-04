@@ -1,10 +1,20 @@
 import React from "react";
+import { motion } from "framer-motion";
+
+
 import styled from "styled-components";
 
 
 
-exports.Card = styled.section`
+exports.Card = styled(motion.section)
+  .attrs({ 
+    initial:{ opacity: 0, y: 10  },    
+    animate: { opacity: 1, y: 0  },
+    exit:{ opacity: 0, y: -10 },
+    transition:{ duration: 1 }
+  })`
   border: 1px solid #333;
+  width: calc(100% - 300px);
   margin: 20px 0;
   padding: 15px 25px;
   border-radius: 10px;
@@ -15,6 +25,8 @@ exports.Card = styled.section`
     max-width: 300px;
   }
 `;
+
+ 
 
 
 exports.Input = styled.div`

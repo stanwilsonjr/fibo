@@ -15,6 +15,7 @@
   "dependencies": {
     "@babel/core": "^7.11.6",
     "@babel/plugin-transform-destructuring": "^7.10.4",
+    "framer-motion": "^2.7.7",
     "moment": "^2.28.0",
     "rc-time-picker": "^3.7.3",
     "react": "^16.13.1",

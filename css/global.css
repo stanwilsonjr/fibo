@@ -9,14 +9,15 @@ body{
     font-family: 'Montserrat', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
-article{
-    width: 70vw;
-    margin: 100px auto;
-}
+ 
 h1{
     font-size: 100px;
     font-weight: 900;
     margin: 0;
     font-family: Inter, sans-serif;
+}
+h1::after{
+    content: ".";
+    color: red;
 }
  
