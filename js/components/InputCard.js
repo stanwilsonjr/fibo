@@ -21,7 +21,7 @@ export default function Inputcard() {
           value={context.state.desc}
           placeholder="Add Description"
           onChange={(e) => {
-            setState({ ...context.state, desc: e.currentTarget.value });
+            context.setState({ ...context.state, desc: e.currentTarget.value });
           }}
         />
       </Input>
