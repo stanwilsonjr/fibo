@@ -9,7 +9,9 @@ body{
     font-family: 'Montserrat', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
- 
+a{
+    color: red;
+}
 h1{
     font-size: 100px;
     font-weight: 900;

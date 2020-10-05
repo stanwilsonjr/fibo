@@ -29,10 +29,6 @@ const columns = [
     displayName: "End Time",
   },
   {
-    id: "location",
-    displayName: "Location",
-  },
-  {
     id: "desc",
     displayName: "Description",
   },
@@ -54,31 +50,33 @@ export default function Downloader() {
     newDate.setDate(newDate.getDate() + parseInt(days));
     return moment(newDate).format("MM/DD/YYYY");
   }
-
+  function slugify(str){
+    return str.trim().replace(/\s/g,"-").toLowerCase();
+  }
   let intervals = buildInterval(10);
   let schduleArr = [];
-
+  
   intervals.forEach((i) => {
     let eventData = {
       subject: state.title,
       start_date: addDays(i, state.date),
-      start_time: state.startTime,
-      end_time: state.endTime,
+      start_time: moment(state.startTime, "HH:mm").format("hh:mm A"),
+      end_time:  moment(state.endTime, "HH:mm").format("hh:mm A"),
       desc: state.desc,
-      all_day_event: false,
-      location: false,
+      all_day_event: "False"
     };
     schduleArr.push(eventData);
   });
-
-  console.log(schduleArr.length);
-
+  
+  
+  let eventName =  slugify(state.title);
   return (
     <Card>
       {/* {JSON.stringify(schduleArr)} */}
 
-      <h2>Download your schedule</h2>
-      <CsvDownloader columns={columns} filename="myfile" datas={schduleArr}>
+      <h2>Download your plan</h2>
+      <p> After you download your plan you can <a href="https://support.google.com/calendar/answer/37118?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">upload it to an new or existing Google Calendar</a></p>
+      <CsvDownloader columns={columns} filename={eventName} datas={schduleArr}>
         <button>Download</button>
       </CsvDownloader>
     </Card>

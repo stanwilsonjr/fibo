@@ -49,8 +49,9 @@ export default function App(props) {
           <h1>FIBO</h1>
     
           <p>A spaced repetition planner based on the fibonacci sequence</p>
-          <button onClick={(e) => progress("next")}>Next</button>
           <button onClick={(e) => progress("prev")}>Previous</button>
+          <button onClick={(e) => progress("next")}>Next</button>
+
         </section>
         <AnimatePresence>
           <ActiveCard />
