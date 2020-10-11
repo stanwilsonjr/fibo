@@ -1,11 +1,24 @@
 import React, { useContext } from "react";
 import { Card } from "./SharedElements";
-
 import { AppContext } from "./AppContext";
-
+import styled from "styled-components";
 import moment from "moment";
-
 import CsvDownloader from "react-csv-downloader";
+
+
+
+
+const Downloadbutton = styled.div`
+  background: #222;
+  color: #fff;
+  padding: 5px 7px;
+  border-radius: 7px;
+  align-self: self-start;
+
+`
+
+
+
 
 const columns = [
   {
@@ -77,7 +90,7 @@ export default function Downloader() {
       <h2>Download your plan</h2>
       <p> After you download your plan you can <a href="https://support.google.com/calendar/answer/37118?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">upload it to an new or existing Google Calendar</a></p>
       <CsvDownloader columns={columns} filename={eventName} datas={schduleArr}>
-        <button>Download</button>
+        <Downloadbutton>Download</Downloadbutton>
       </CsvDownloader>
     </Card>
   );

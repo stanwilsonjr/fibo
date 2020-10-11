@@ -16,6 +16,13 @@ const Article = styled.article`
     margin: 0 20px 0 0;
     width: 300px;
   }
+  @media only screen 
+    and (min-device-width: 320px) 
+    and (max-device-width: 480px)
+    and (-webkit-min-device-pixel-ratio: 2) {
+      flex-direction: column;
+      width: calc(100% - 60px);
+  }
 `;
 
 export default function App(props) {
@@ -51,7 +58,8 @@ export default function App(props) {
           <p>A spaced repetition planner based on the fibonacci sequence</p>
           <button onClick={(e) => progress("prev")}>Previous</button>
           <button onClick={(e) => progress("next")}>Next</button>
-
+          {/* <span className="material-icons">keyboard_arrow_down</span>
+          <span className="material-icons">keyboard_arrow_up</span> */}
         </section>
         <AnimatePresence>
           <ActiveCard />

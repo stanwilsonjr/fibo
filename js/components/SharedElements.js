@@ -24,20 +24,35 @@ exports.Card = styled(motion.section)
   & .inputcontainer {
     max-width: 300px;
   }
+  @media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+      width: calc(100% - 60px);
+ 
+  }
 `;
 
  
 
 
 exports.Input = styled.div`
-  width: 300px;
+  width: 100%;
+  max-width: 400px;
   & input {
     width: 100%;
     min-height: 30px;
     margin: 0 0 5px 0;
     padding: 0;
+   
   }
 
+  @media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+     width: 100%;
+  }
   & textarea {
     width: 100%;
     min-height: 200px;
