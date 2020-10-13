@@ -14,7 +14,6 @@ exports.Card = styled(motion.section)
     transition:{ duration: 1 }
   })`
   border: 1px solid #333;
-  width: calc(100% - 300px);
   margin: 20px 0;
   padding: 15px 25px;
   border-radius: 10px;
@@ -28,7 +27,7 @@ exports.Card = styled(motion.section)
   and (min-device-width: 320px) 
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
-      width: calc(100% - 60px);
+
  
   }
 `;

@@ -9,6 +9,7 @@ body{
     margin:0;
     font-family: 'Montserrat', sans-serif;
     -webkit-font-smoothing: antialiased;
+    
 }
 a{
     color: red;
@@ -23,4 +24,33 @@ h1::after{
     content: ".";
     color: red;
 }
+article {
+    width: 70vw;
+margin: 100px auto;
+display:flex;
+
+}
+article .deck{
+  margin: 0 20px 0 0;
+  width: 300px;
+}
+
+#app{
+
+    width: calc(100% - 300px);
+}
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    article {
+        flex-direction: column;
+        width: calc(100% - 60px);
+
+    }
+    #app{
+        width: calc(100% - 30px);
+    }
+}
+
  
