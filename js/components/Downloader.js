@@ -80,6 +80,7 @@ export default function Downloader() {
     };
     schduleArr.push(eventData);
   });
+  schduleArr.splice(1,1);
   
   
   let eventName =  slugify(state.title);
