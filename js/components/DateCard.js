@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import DayPicker from "react-day-picker";
 import TimePicker from "rc-time-picker";
+import Nextbutton  from "./NextButton";
 import moment from "moment";
 
 import { AppContext } from "./AppContext";
@@ -35,6 +36,8 @@ export default function Datecard() {
               defaultValue={context.state.startTime}
             />
             <DayPicker onDayClick={handleDayClick} className="inputcontainer" />
+            <Nextbutton   disabled={false} text="Review Plan"  />
+
           </Card>
     )
 

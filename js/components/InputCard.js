@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "./AppContext";
 import { Card,Input } from "./SharedElements";
+import Nextbutton from './NextButton';
 
 export default function Inputcard() {
   const context = useContext(AppContext);
@@ -25,6 +26,7 @@ export default function Inputcard() {
           }}
         />
       </Input>
+      <Nextbutton   disabled={context.state.title === '' ||  context.state.desc === '' } text="Schedule Plan"  />
     </Card>
   );
 }
