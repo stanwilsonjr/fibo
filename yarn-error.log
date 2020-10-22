@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/14.11.0/bin/node /usr/local/bin/yarn add SharedElements
+  /usr/local/Cellar/node/14.11.0/bin/node /usr/local/bin/yarn add NextButton
 
 PATH: 
   /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/stanwilsonjr/Development/fibo-cal/node_modules/.bin:/usr/local/opt/ruby/bin:/Users/stanwilsonjr/google-cloud-sdk/bin:/Users/stanwilsonjr/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/mysql/bin:/usr/local/go/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.npmjs.org/SharedElements: Not found
+  Error: https://registry.npmjs.org/NextButton: Not found
       at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
       at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
       at Request.emit (events.js:314:20)
@@ -34,7 +34,8 @@ npm manifest:
     "main": "index.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "parcel index.html"
+      "dev": "parcel index.html",
+      "build": "parcel build index.html"
     },
     "author": "Stan Wilson Jr",
     "license": "ISC",
@@ -44,6 +45,7 @@ npm manifest:
     "dependencies": {
       "@babel/core": "^7.11.6",
       "@babel/plugin-transform-destructuring": "^7.10.4",
+      "framer-motion": "^2.7.7",
       "moment": "^2.28.0",
       "rc-time-picker": "^3.7.3",
       "react": "^16.13.1",

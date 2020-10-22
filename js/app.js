@@ -8,22 +8,6 @@ import { AnimatePresence } from "framer-motion";
 import { AppContext } from "./components/AppContext";
 import moment from "moment";
 
-// const Article = styled.article`
-//   width: 70vw;
-//   margin: 100px auto;
-//   display:flex;
-//   & .deck{
-//     margin: 0 20px 0 0;
-//     width: 300px;
-//   }
-//   @media only screen 
-//     and (min-device-width: 320px) 
-//     and (max-device-width: 480px)
-//     and (-webkit-min-device-pixel-ratio: 2) {
-//       flex-direction: column;
-//       width: calc(100% - 60px);
-//   }
-// `;
 
 export default function App(props) {
   let initialState = {
@@ -50,14 +34,12 @@ export default function App(props) {
     }
   }
   return (
-    <AppContext.Provider value={{ state, setState }}>
-      
-        <button onClick={(e) => progress("prev")}>Previous</button>
-        <button onClick={(e) => progress("next")}>Next</button>
+    <AppContext.Provider value={{ state, setState, step, updateSteps }}>
         <AnimatePresence>
           <ActiveCard />
         </AnimatePresence>
-       
+        {/* <button onClick={(e) => progress("prev")}>Previous</button>
+        <button onClick={(e) => progress("next")}>Next</button> */}
     </AppContext.Provider>
   );
 }

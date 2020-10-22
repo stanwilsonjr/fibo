@@ -85,10 +85,14 @@ export default function Downloader() {
   let eventName =  slugify(state.title);
   return (
     <Card>
-      {/* {JSON.stringify(schduleArr)} */}
+      <h2>Review your {state.title} learning plan</h2>
+      <section>
+        {schduleArr.map(  (ev, i) => (
+          <div key={`event-${i}`}> Session {i + 1}  {ev.start_date} :  {ev.start_time}- {ev.end_time}</div>
+        ))}
+      </section>
 
-      <h2>Download your plan</h2>
-      <p> After you download your plan you can <a href="https://support.google.com/calendar/answer/37118?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">upload it to an new or existing Google Calendar</a></p>
+      <p> Download your plan and <a href="https://support.google.com/calendar/answer/37118?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">upload it to an new or existing Google Calendar</a></p>
       <CsvDownloader columns={columns} filename={eventName} datas={schduleArr}>
         <Downloadbutton>Download</Downloadbutton>
       </CsvDownloader>
