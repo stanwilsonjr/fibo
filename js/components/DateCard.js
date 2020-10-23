@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import styled from "styled-components";
+
 import DayPicker from "react-day-picker";
 import TimePicker from "rc-time-picker";
 import Nextbutton  from "./NextButton";
@@ -10,6 +12,12 @@ import { Card } from "./SharedElements";
 import "react-day-picker/lib/style.css";
 import "rc-time-picker/assets/index.css";
 
+
+const Datecontainer = styled.div`
+  width: 100%;
+  max-width: 270px;
+
+`
 
 export default function Datecard() {
   const context = useContext(AppContext); 
@@ -27,17 +35,17 @@ export default function Datecard() {
 
         <Card>
             <h2>When do you want to start?</h2>
-
-            <TimePicker
-              showSecond={false}
-              onChange={updateTime}
-              use12Hours
-              className="inputcontainer"
-              defaultValue={context.state.startTime}
-            />
-            <DayPicker onDayClick={handleDayClick} className="inputcontainer" />
-            <Nextbutton   disabled={false} text="Review Plan"  />
-
+            <Datecontainer>
+              <TimePicker
+                showSecond={false}
+                onChange={updateTime}
+                use12Hours
+                className="inputcontainer"
+                defaultValue={context.state.startTime}
+              />
+              <DayPicker onDayClick={handleDayClick} className="inputcontainer" />
+              <Nextbutton   disabled={false} text="Review Plan"  />
+            </Datecontainer>
           </Card>
     )
 

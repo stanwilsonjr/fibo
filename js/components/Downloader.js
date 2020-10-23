@@ -8,13 +8,35 @@ import CsvDownloader from "react-csv-downloader";
 
 
 
-const Downloadbutton = styled.div`
-  background: #222;
+const Downloadbutton = styled.button`
+  border: none;
+  background-color: orange;
+  font-family: inherit;
+  font-size: 15px;
+  padding: 7px;
+  cursor: pointer;
   color: #fff;
-  padding: 5px 7px;
-  border-radius: 7px;
-  align-self: self-start;
+  margin: 15px 0 0 0;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  & span{
+    margin-right: 3px;
+  }
+`
 
+const EventItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #efefef;
+   
+  padding: 3px 0 ;
+  & .event-title{
+    font-weight: 600;
+  }
+  & .event-timing{
+
+  }
 `
 
 
@@ -89,13 +111,19 @@ export default function Downloader() {
       <h2>Review your {state.title} learning plan</h2>
       <section>
         {schduleArr.map(  (ev, i) => (
-          <div key={`event-${i}`}> Session {i + 1}  {ev.start_date} :  {ev.start_time}- {ev.end_time}</div>
+          <EventItem key={`event-${i}`} > 
+            <span className="event-title">Session {i + 1}</span> 
+            <span className="event-timing">{ev.start_date} {ev.start_time}-{ev.end_time}</span>
+          </EventItem>
         ))}
       </section>
 
-      <p> Download your plan and <a href="https://support.google.com/calendar/answer/37118?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">upload it to an new or existing Google Calendar</a></p>
+      <p>   <a href="https://support.google.com/calendar/answer/37118?co=GENIE.Platform%3DDesktop&hl=en" target="_blank"> How to upload your plan to a new or existing Google Calendar</a></p>
       <CsvDownloader columns={columns} filename={eventName} datas={schduleArr}>
-        <Downloadbutton>Download</Downloadbutton>
+        <Downloadbutton>
+          <span class="material-icons">arrow_circle_down</span>
+          Download your plan
+          </Downloadbutton>
       </CsvDownloader>
     </Card>
   );

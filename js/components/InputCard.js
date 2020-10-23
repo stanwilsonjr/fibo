@@ -25,8 +25,9 @@ export default function Inputcard() {
             context.setState({ ...context.state, desc: e.currentTarget.value });
           }}
         />
+              <Nextbutton   disabled={context.state.title === '' ||  context.state.desc === '' } text="Schedule Plan"  />
+
       </Input>
-      <Nextbutton   disabled={context.state.title === '' ||  context.state.desc === '' } text="Schedule Plan"  />
     </Card>
   );
 }

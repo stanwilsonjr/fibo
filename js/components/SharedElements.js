@@ -65,6 +65,8 @@ exports.Input = styled.div`
   }
   & textarea{
     border-radius: 2px;
+    border: #222 solid 1px;
+
     -webkit-appearance: none;
     outline: none;
     padding: 5px;
