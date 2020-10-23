@@ -1,99 +1,92 @@
-@import url('https://rsms.me/inter/inter.css');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons&family=DM+Serif+Display');
-@import url('https://fonts.googleapis.com/css2?family=Material+Icons&family=DM+Serif+Display');
+@import url("https://rsms.me/inter/inter.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons&family=DM+Serif+Display");
+@import url("https://fonts.googleapis.com/css2?family=Material+Icons&family=DM+Serif+Display");
 
-
-:root{
-  --main-text-color: #EFEFEF;
+:root {
+  --main-text-color: #efefef;
   --highlight-color: orange;
 }
-html { font-family: 'Inter', sans-serif; }
+html {
+  font-family: "Inter", sans-serif;
+}
 @supports (font-variation-settings: normal) {
-  html { font-family: 'Inter var', sans-serif; }
+  html {
+    font-family: "Inter var", sans-serif;
+  }
 }
-body,html{
-	padding:0;
-	height: 100%;
+body,
+html {
+  padding: 0;
+  height: 100%;
 }
-body{
-    display: flex;
-    height: 100%;
-	width: 100%;
-	position: relative;
-    padding:0;
-    margin:0;
-    -webkit-font-smoothing: antialiased;
-    /* background:radial-gradient(farthest-corner at 40px 40px,
+body {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  /* background:radial-gradient(farthest-corner at 40px 40px,
     #FED24D 0%, transparent 100%); */
-    background-color: #496994;
- 
+  background-color: #496994;
+
   /* background-image:  radial-gradient(#333333 1px, transparent 1px), radial-gradient(#333333 1px, #ffffff 1px);
   background-size: 40px 40px;
   background-position: 0 0,20px 20px; */
-  
 }
- 
-a{
-    color: var(--highlight-color);
+
+a {
+  color: var(--highlight-color);
 }
-.deck a{
+.deck a {
   color: #fff;
- 
 }
-h1{
-    font-size:  100px;
-    margin: 0;
-    font-weight: 900;
-    font-family: 'Inter', serif;
-    line-height: 80px;
-    text-transform: uppercase;
-    color: var(--main-text-color);
-    position: relative;
-    color: #fff;
+h1 {
+  font-size: 100px;
+  margin: 0;
+  font-weight: 900;
+  font-family: "Inter", serif;
+  line-height: 80px;
+  text-transform: uppercase;
+  color: var(--main-text-color);
+  position: relative;
+  color: #fff;
 }
- 
-.deck h2{
+
+.deck h2 {
   position: relative;
   font-weight: 700;
-    font-family: 'Inter', serif;
+  font-family: "Inter", serif;
   font-size: 1.5rem;
   line-height: 1.5rem;
 }
- 
- 
+
 article {
-    width: 70vw;
-margin: 100px auto;
-display:flex;
-color: var(--main-text-color);
-
-
+  width: 70vw;
+  margin: 100px auto;
+  display: flex;
+  color: var(--main-text-color);
 }
-article .deck{
+article .deck {
   margin: 0 20px 0 0;
   width: 300px;
   color: var(--main-text-color);
-  font-family: 'Inter', serif;
+  font-family: "Inter", serif;
   font-weight: 300;
-
 }
 
-#app{
-
-    width: calc(100% - 300px);
-    color: #444;
+#app {
+  width: calc(100% - 300px);
+  color: #444;
 }
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 480px) {
-    article {
-        flex-direction: column;
-        width: calc(100% - 60px);
-
-    }
-    #app{
-        width: calc(100% - 30px);
-    }
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  article {
+    flex-direction: column;
+    width: calc(100% - 40px);
+    margin: 50px auto;
+  }
+  #app {
+    width: calc(100% - 10px);
+  }
 }
-
- 

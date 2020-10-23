@@ -39,7 +39,7 @@ exports.Card = styled(motion.section)
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
 
- 
+    
   }
 `;
 
