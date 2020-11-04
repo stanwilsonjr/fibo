@@ -18,6 +18,13 @@ const Datecontainer = styled.div`
   max-width: 270px;
 
 `
+const modifiersStyles = {
+  thursdays: {
+    color: '#ffc107',
+    backgroundColor: '#fffdee',
+  }
+};
+
 
 export default function Datecard() {
   const context = useContext(AppContext); 
@@ -43,7 +50,7 @@ export default function Datecard() {
                 className="inputcontainer"
                 defaultValue={context.state.startTime}
               />
-              <DayPicker onDayClick={handleDayClick} className="inputcontainer" />
+              <DayPicker modifiersStyles={modifiersStyles}  onDayClick={handleDayClick} className="inputcontainer" />
               <Nextbutton   disabled={false} text="Review Plan"  />
             </Datecontainer>
           </Card>

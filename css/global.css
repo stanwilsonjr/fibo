@@ -1,6 +1,6 @@
 @import url("https://rsms.me/inter/inter.css");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons&family=DM+Serif+Display");
-@import url("https://fonts.googleapis.com/css2?family=Material+Icons&family=DM+Serif+Display");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display");
 
 :root {
   --main-text-color: #efefef;
@@ -67,6 +67,7 @@ article {
   margin: 100px auto;
   display: flex;
   color: var(--main-text-color);
+  
 }
 article .deck {
   margin: 0 20px 0 0;
@@ -75,10 +76,14 @@ article .deck {
   font-family: "Inter", serif;
   font-weight: 300;
 }
-
+.DayPicker-Day--today {
+  
+  color: orange !important;
+}
 #app {
   width: calc(100% - 300px);
   color: #444;
+  min-width: 340px;
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   article {

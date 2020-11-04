@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+ 
 import { Card } from "./SharedElements";
 import { AppContext } from "./AppContext";
 import styled from "styled-components";
@@ -46,6 +47,34 @@ const EventItem = styled.div`
 
 `
 
+const Buttonscontainer = styled.div`
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    & button {
+        border: none;
+        background-color: orange;
+        font-family: inherit;
+        font-size: 15px;
+        padding: 7px;
+        cursor: pointer;
+        color: #fff;
+        margin:  0;
+        font-weight: 500;  
+    }
+    & .back-button{
+        display: ${(props) =>  (props.step == 0)? "none" : 'inline-flex' };
+        align-items: center;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+`
+
 
 
 
@@ -78,7 +107,7 @@ const columns = [
 
 export default function Downloader() {
   const context = useContext(AppContext);
-  const { state  } = context;
+  const { state ,step ,updateSteps } = context;
   function buildInterval(n) {
 
     let arr = [0, 1];
@@ -126,12 +155,19 @@ export default function Downloader() {
       </section>
 
       <p>   <a href="https://support.google.com/calendar/answer/37118?co=GENIE.Platform%3DDesktop&hl=en" target="_blank"> How to upload your plan to a new or existing Google Calendar</a></p>
+     <Buttonscontainer>
+
+     <a className="back-button"  onClick={ (e) => updateSteps(step - 1) } > 
+                <span className="material-icons">navigate_before</span>
+                Back
+     </a>
       <CsvDownloader columns={columns} filename={eventName} datas={schduleArr}>
         <Downloadbutton>
           <span class="material-icons">arrow_circle_down</span>
           Download your plan
           </Downloadbutton>
       </CsvDownloader>
+      </Buttonscontainer>
     </Card>
   );
 }

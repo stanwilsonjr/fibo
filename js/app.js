@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Downloader from "./components/Downloader";
 import Inputcard from "./components/InputCard";
 import Datecard from "./components/DateCard";
+import Introcard from "./components/IntroCard";
+
 import { AnimatePresence } from "framer-motion";
 import { AppContext } from "./components/AppContext";
 import moment from "moment";
