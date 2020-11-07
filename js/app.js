@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import gtag  from 'ga-gtag';
+
 import styled from "styled-components";
 
 import Downloader from "./components/Downloader";
@@ -40,8 +42,6 @@ export default function App(props) {
         <AnimatePresence>
           <ActiveCard />
         </AnimatePresence>
-        {/* <button onClick={(e) => progress("prev")}>Previous</button>
-        <button onClick={(e) => progress("next")}>Next</button> */}
     </AppContext.Provider>
   );
 }
